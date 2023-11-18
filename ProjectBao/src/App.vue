@@ -1,11 +1,14 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
 import Header from "./components/Header.vue";
+
+import PrintBill from "./components/PrintBill.vue";
 </script>
 
 <template>
   <Header />
   <Container />
+  <PrintBill/>
   <RouterView />
 </template>
 

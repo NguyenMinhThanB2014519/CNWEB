@@ -1,37 +1,119 @@
-<html>
-  <head>
-    <title>Feedback form</title>
-<form method = "post" action = "">
-    <title>Feedback form </title>
-
-  </head>
-  <body>
-
-  <h1>Feedack Form</h1>
-<p>Please fill out this form to help me improve My site.</p>
-
-<p><lable>Name:
-  <input name="name" type="text" size="20"/> <br>
-
-  E-mail Addres:
-    <input name="email" type="email" size="20"/>
-  </lable>
-
-  <p>
-    <strong>Things you like on my site:</strong> <br>
-
-    <label>Site design
-<input name = "thingsliked" type = "checkbox" value = "Design" /></label>
-<br>
-<label>Contents
-<input name = "thingsliked" type = "checkbox" value = "Contents" /></label>
-<br>
- <label>Ease of use
-<input name = "thingsliked" type = "checkbox" value = "Ease" /></label>
-<br>
 
 
-<input type = "submit"  value = "Submit Your Entries"/>
- <input type = "reset" value = "Clear Your Entries" />
-  </body>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hóa Đơn</title>
+</head>
+<body>
+  <div id="app">
+    <div class="invoice">
+      <h1 class="invoice-title">Hóa Đơn</h1>
+      <div class="customer-info">
+        <p><strong>Khách hàng:</strong> {{ customerName }}</p>
+        <p><strong>Địa chỉ:</strong> {{ customerAddress }}</p>
+        <p><strong>Số điện thoại:</strong> {{ customerPhone }}</p>
+      </div>
+      <table class="invoice-table">
+        <thead>
+          <tr>
+            <th>Mặt hàng</th>
+            <th>Đơn giá</th>
+            <th>Số lượng</th>
+            <th>Tổng cộng</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item, index) in items" :key="index">
+            <td>{{ item.name }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.price * item.quantity }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="total">
+        <p><strong>Tổng cộng:</strong> {{ total }}</p>
+      </div>
+    </div>
+    <button @click="inHoaDon">In Hóa Đơn</button>
+  </div>
+
+  <style>
+    /* Định dạng hóa đơn */
+    .invoice {
+      width: 300px;
+      margin: 0 auto;
+      font-family: Arial, sans-serif;
+      border: 1px solid #ccc;
+      padding: 20px;
+    }
+
+    .invoice-title {
+      text-align: center;
+    }
+
+    .customer-info {
+      margin-top: 20px;
+    }
+
+    .invoice-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    .invoice-table th,
+    .invoice-table td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .total {
+      margin-top: 20px;
+      text-align: right;
+    }
+
+    /* Ẩn nút in khi in trang */
+    @media print {
+      button {
+        display: none;
+      }
+    }
+  </style>
+
+  <script src="https://unpkg.com/vue@3.2.31/dist/vue.global.prod.js"></script>
+  <script>
+    const { createApp, ref,computed } = Vue;
+
+    const app = createApp({
+      setup() {
+        const customerName = ref('Người mua hàng');
+        const customerAddress = ref('Địa chỉ mua hàng');
+        const customerPhone = ref('Số điện thoại');
+        const items = ref([
+          { name: 'Sản phẩm 1', price: 100, quantity: 2 },
+          { name: 'Sản phẩm 2', price: 50, quantity: 3 },
+          { name: 'Sản phẩm 3', price: 30, quantity: 1 },
+        ]);
+
+        const total = computed(() => {
+          return items.value.reduce((acc, item) => acc + item.price * item.quantity, 0);
+        });
+
+        const inHoaDon = () => {
+          window.print();
+        };
+
+        return { customerName, customerAddress, customerPhone, items, total, inHoaDon };
+      }
+    });
+
+    app.mount('#app');
+  </script>
+</body>
 </html>
