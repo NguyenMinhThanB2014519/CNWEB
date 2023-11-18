@@ -29,7 +29,8 @@ const $emit = defineEmits(["submit", "update:modelValue"]);
 
 <style scoped>
 input[type="text"] {
-  margin-top: 5px;
+  
+  margin-top: 09px;
   margin-left: 20%;
   max-width: 50%;
 }

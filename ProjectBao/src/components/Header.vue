@@ -6,7 +6,7 @@
         <img src="../assets/Vue_Logo_Black.png" alt="" width="70px" />
       </div>
 
-      <ul class="d-flex justify-content-between">
+      <ul class="d-flex justify-content-between ml-3 header">
         <router-link to="/home">Home</router-link>
         <router-link to="/products">Products</router-link>
         <router-link to="/contacts">Contacts</router-link>
@@ -56,6 +56,14 @@ const addToCart = (id) => {
 </script>
 
 <style lang="scss" scoped>
+
+.header{
+ 
+a{
+  // padding: 20px;+
+  margin : 13px 0 0 10px;
+ }
+}
 ul {
   display: flex;
   flex-direction: row-reverse;
@@ -109,8 +117,11 @@ ul {
   }
 }
 button {
+  align-items: center;
+  display: flex;
   .search {
-    color: black;
+  color: black;
+
   }
 }
 img {
@@ -118,3 +129,4 @@ img {
   margin-left: 36px;
 }
 </style>
+

@@ -7,7 +7,9 @@ const props = defineProps({
   data: Object,
   price: Number,
 });
-const emit = defineEmits(["delete-item"]);
+
+const $emit = defineEmits(['delete-item'])
+// const emit = defineEmits(["delete-item",'delete-item']);
 const data = ref(props.data);
 
 const decreaseAmount = () => {
@@ -25,13 +27,9 @@ const increaseAmount = () => {
 //   // console.log(data.value.id);
 // };
 
-const deleteItem = (id) => {
-  console.log(id);
-};
-
-const deleteitem = (id) => {
-  console.log(id);
-};
+// const DeleteItem = () =>{
+//   console.log('Delete Item')
+// }
 </script>
 
 <template>
@@ -47,11 +45,11 @@ const deleteitem = (id) => {
         <span class="minus bg-dark" @click="decreaseAmount()">-</span>
         <input type="number" class="count" name="qty" v-model="data.amount" />
         <span class="plus bg-dark" @click="increaseAmount">+</span>
+        <button @click="$emit('DeleteItem',props.data.id)"> Delete </button>
       </div>
     </td>
-    <td>
-      <button>Delete</button>
-    </td>
+
+
     <td class="text-center">{{ data.price * data.amount }}</td>
   </tr>
 </template>

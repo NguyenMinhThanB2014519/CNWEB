@@ -38,6 +38,11 @@ const totalPrice = computed(() => {
     0
   );
 });
+
+const deleteItem = (id) =>{
+  // console.log(id)
+  datas.value = datas.value.filter(data =>data.id !== id)
+}
 </script>
 
 <template>
@@ -54,7 +59,8 @@ const totalPrice = computed(() => {
             v-for="data in datas"
             :data="data"
             :key="data.id"
-            :delete-item="deleteItem"
+ 
+            @delete-item="deleteItem"
           />
           <tr class="text-center">
             <td colspan="2">Tổng cộng</td>
